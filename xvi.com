@@ -11,20 +11,14 @@
 
     <header>
         <div class="nav-container">
-            <img src="fiore.png" id="menu-trigger" class="flower-icon" alt="Menu">
-            
+            <img src="3.png" id="menu-trigger" class="flower-icon" alt="Menu">
             <nav class="top-nav">
-                <a href="#">HOME</a>
-                <a href="#">HISTORY</a>
-                <a href="#">MINECRAFT</a>
-                <a href="#">GAMES</a>
-                <a href="#">SHOP</a>
+                <a href="#" onclick="showPage('home')">HOME</a>
+                <a href="#" onclick="showPage('history')">HISTORY</a>
+                <a href="#" onclick="showPage('minecraft')">MINECRAFT</a>
+                <a href="#" onclick="showPage('games')">GAMES</a>
+                <a href="#" onclick="showPage('shop')">SHOP</a>
             </nav>
-            
-            <div class="search-bar">
-                <input type="text" placeholder="SEARCH...">
-            </div>
-            
             <div class="user-controls">
                 <button id="login-btn" class="action-btn">LOGIN</button>
             </div>
@@ -33,65 +27,67 @@
 
     <div id="side-menu" class="side-menu">
         <div class="menu-header">
-            <img src="fiore.png" class="flower-mini" alt="Mini Fiore">
+            <img src="3.png" class="flower-mini">
             <h2>XVI</h2>
         </div>
         <ul>
-            <li><a href="#">- GAMES</a></li>
-            <li><a href="#">- HISTORY</a></li>
-            <li><a href="#">- MINECRAFT</a></li>
-            <li><a href="#">- SHOP</a></li>
+            <li><a href="#" onclick="showPage('games')">- GAMES</a></li>
+            <li><a href="#" onclick="showPage('history')">- HISTORY</a></li>
+            <li><a href="#" onclick="showPage('minecraft')">- MINECRAFT</a></li>
+            <li><a href="#" onclick="showPage('shop')">- SHOP</a></li>
         </ul>
     </div>
 
-    <main class="hero">
-        <div class="logo-container">
-            <img src="logo.png" alt="XVI TEAM LOGO" class="main-logo">
-        </div>
-    </main>
+    <div id="content-area">
+        <section id="page-home" class="page active">
+            <img src="1.png" class="full-bg-image">
+        </section>
+
+        <section id="page-history" class="page">
+            <img src="4.jpg" class="full-bg-image">
+        </section>
+
+        <section id="page-minecraft" class="page">
+            <img src="5.jpg" class="full-bg-image">
+        </section>
+
+        <section id="page-games" class="page">
+            <img src="6.jpg" class="full-bg-image">
+        </section>
+
+        <section id="page-shop" class="page">
+            <img src="7.jpg" class="full-bg-image">
+        </section>
+    </div>
 
     <footer>
-        <div class="newsletter">
-            <h3>STAY UPDATED</h3>
-            <input type="email" placeholder="EMAIL ADDRESS">
-            <button class="action-btn">SIGN-UP</button>
+        <div class="newsletter-section">
+            <img src="2.jpg" class="footer-bg">
+            <div class="footer-overlay">
+                <a href="#" class="privacy-link">Privacy Policy</a>
+                <a href="#" class="legal-link">Legal</a>
+            </div>
         </div>
-        <div class="footer-links">
-            <a href="#">Contact us</a>
-            <a href="#">Support</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Legal</a>
-        </div>
-        <p>© XVI Team 2026. All rights reserved.</p>
     </footer>
 
     <script>
-        // 1. Logica per aprire/chiudere il menù col fiore
-        const menuTrigger = document.getElementById('menu-trigger');
-        const sideMenu = document.getElementById('side-menu');
-        
-        menuTrigger.onclick = function() {
-            sideMenu.classList.toggle('active');
+        // Funzione per cambiare pagina
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            document.getElementById('side-menu').classList.remove('active');
+        }
+
+        // Fiore apre menu
+        document.getElementById('menu-trigger').onclick = () => {
+            document.getElementById('side-menu').classList.toggle('active');
         };
 
-        // 2. Logica finta per il Login / Logout
-        const loginBtn = document.getElementById('login-btn');
-        let isLoggedIn = false;
-
-        loginBtn.onclick = function() {
-            if(!isLoggedIn) {
-                let user = prompt("Inserisci il tuo Username:");
-                if(user && user.trim() !== "") {
-                    loginBtn.innerText = "LOGOUT (" + user + ")";
-                    loginBtn.style.backgroundColor = "#ff6b81"; // Cambia colore da loggato
-                    isLoggedIn = true;
-                }
-            } else {
-                loginBtn.innerText = "LOGIN";
-                loginBtn.style.backgroundColor = "#ffb6c1"; // Torna al colore base
-                isLoggedIn = false;
-                alert("Ti sei disconnesso con successo!");
-            }
+        // Login base
+        const btn = document.getElementById('login-btn');
+        btn.onclick = () => {
+            let user = prompt("Username:");
+            if(user) btn.innerText = "LOGOUT (" + user + ")";
         };
     </script>
 </body>
